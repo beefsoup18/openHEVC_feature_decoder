@@ -170,7 +170,7 @@ static void video_decode_example(const char *filename)
     pFormatCtx = avformat_alloc_context();
 
     if(avformat_open_input(&pFormatCtx, filename, NULL, NULL)!=0) {
-        printf("%s",filename);
+        printf("could not open input: %s", filename);
         exit(1); // Couldn't open file
     }
     if ( (video_stream_idx = av_find_best_stream(pFormatCtx, AVMEDIA_TYPE_VIDEO, -1, -1, NULL, 0)) < 0) {
@@ -272,13 +272,13 @@ static void video_decode_example(const char *filename)
                 if (fout) {
                     int format = openHevcFrameCpy.frameInfo.chromat_format == YUV420 ? 1 : 0;
                     libOpenHevcGetOutputCpy(openHevcHandle, 1, &openHevcFrameCpy);
-                    fwrite( openHevcFrameCpy.pvY , sizeof(uint8_t) , openHevcFrameCpy.frameInfo.nYPitch * openHevcFrameCpy.frameInfo.nHeight, fout);
-                    fwrite( openHevcFrameCpy.pvU , sizeof(uint8_t) , openHevcFrameCpy.frameInfo.nUPitch * openHevcFrameCpy.frameInfo.nHeight >> format, fout);
-                    fwrite( openHevcFrameCpy.pvV , sizeof(uint8_t) , openHevcFrameCpy.frameInfo.nVPitch * openHevcFrameCpy.frameInfo.nHeight >> format, fout);
+//                    fwrite( openHevcFrameCpy.pvY , sizeof(uint8_t) , openHevcFrameCpy.frameInfo.nYPitch * openHevcFrameCpy.frameInfo.nHeight, fout);
+//                    fwrite( openHevcFrameCpy.pvU , sizeof(uint8_t) , openHevcFrameCpy.frameInfo.nUPitch * openHevcFrameCpy.frameInfo.nHeight >> format, fout);
+//                    fwrite( openHevcFrameCpy.pvV , sizeof(uint8_t) , openHevcFrameCpy.frameInfo.nVPitch * openHevcFrameCpy.frameInfo.nHeight >> format, fout);
                     fwrite( openHevcFrameCpy.pvMV , sizeof(uint8_t) , openHevcFrameCpy.frameInfo.nYPitch * openHevcFrameCpy.frameInfo.nHeight, fout);
-                    fwrite( openHevcFrameCpy.pvYR , sizeof(uint8_t) , openHevcFrameCpy.frameInfo.nYPitch * openHevcFrameCpy.frameInfo.nHeight, fout);
-                    fwrite( openHevcFrameCpy.pvUR , sizeof(uint8_t) , openHevcFrameCpy.frameInfo.nUPitch * openHevcFrameCpy.frameInfo.nHeight >> format, fout);
-                    fwrite( openHevcFrameCpy.pvVR , sizeof(uint8_t) , openHevcFrameCpy.frameInfo.nVPitch * openHevcFrameCpy.frameInfo.nHeight >> format, fout);
+//                    fwrite( openHevcFrameCpy.pvYR , sizeof(uint8_t) , openHevcFrameCpy.frameInfo.nYPitch * openHevcFrameCpy.frameInfo.nHeight, fout);
+//                    fwrite( openHevcFrameCpy.pvUR , sizeof(uint8_t) , openHevcFrameCpy.frameInfo.nUPitch * openHevcFrameCpy.frameInfo.nHeight >> format, fout);
+//                    fwrite( openHevcFrameCpy.pvVR , sizeof(uint8_t) , openHevcFrameCpy.frameInfo.nVPitch * openHevcFrameCpy.frameInfo.nHeight >> format, fout);
                 }
                 // save as yuv a single frame.
                 nbFrame++;
